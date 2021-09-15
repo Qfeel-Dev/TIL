@@ -93,3 +93,69 @@
   - HTML에서 부모 요소와 자식 요소에서 자식 요소에 스타일을 지정하지 않을 경우 부모 요소의 스타일 속성이 그대로 전달되는 방식.
 
 ## How to use CSS📕
+
+- 글꼴 관련 스타일 속성
+
+  ```css
+  font-family: 글꼴 이름;
+  /*사용할 글꼴를 설정하는 속성*/
+
+  font-size: 크기;
+  /*글자의 크기를 설정 하는 속성 (value ex|20px, 5pt, 100%)*/
+
+  font-weight: 굵기;
+  /*글자의 굵기를 설정하는 속성 (value ex| bold, lighter, 100~900)*/
+  ```
+
+- 텍스트 관련 스타일 속성
+
+  ```css
+  color: 색상;
+  /*글자색을 지정하는 속성 (value ex| red, #ff0000, rgb(255,0,0))*/
+
+  text-align: 위치;
+  /*텍스트의 좌우 정렬 위치를 지정하는 속성 (value ex| center, right, left)*/
+
+  line-height: 간격;
+  /*텍스트의 간격을 설정 하는 속성 (value ex|20px, 2.0, 200%)*/
+  /*세로 정렬일 경우에도 사용*/
+
+  text-decoration: 줄 표시 위치;
+  /*텍스트의 줄을 긋기 위한 속성 (value ex| underline, overline)*/
+
+  text-shadow: <가로거리> <세로거리> <번짐정도> <색상>;
+  /*텍스트의 그림자 효과 생성을 위한 속성 (value ex| 5 5 2 black)*/
+
+  letter-spacing: 간격;
+  /*자간 조율을 위한 속성 (value ex| 0.2em)*/
+  ```
+
+- 목록 관련 스타일 속성
+
+  ```css
+  list-style-type: 불릿의 모양, 번호의 스타일;
+  /*리스트 문자의 타입을 지정해주는 속성 (value ex| disc, lower-roman)*/
+
+  list-style-img: url(이미지 경로);
+  /*리스트 문자의 타입 대신 이미지를 지정해주는 속성*/
+
+  list-style-position: inside, outside;
+  /*리스트를 들여쓰기 여부에 대한 속성*/
+
+  list-style: type img position;
+  /*목록 관련 스타일 속성을 한꺼번에 이용할 수 있는 속성*/
+  ```
+
+- 표 관련 스타일 속성
+
+  ```css
+  caption-side: top, bottoml;
+  /*표의 제목인 caption의 위치를 조정하는 속성*/
+
+  border: 굵기 선종류 색상;
+  /*표의 테두리를 설정하는 속성 (value ex|1px solid black)*/
+
+  border-collapse: collapse;
+  /*셀과 셀사이의 두 줄의 결합 여부를 설정하는 속성*/
+  /*table 태그에만 적용시키면 됨*/
+  ```
