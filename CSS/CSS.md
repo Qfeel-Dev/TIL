@@ -167,7 +167,8 @@
 - 웹 문서의 요소들은 또, 인라인 레벨 과 블록 레벨로 나눠진다
 
 - 박스모델 구성요소(그림)<br>
-  ![구성요소](.\img\boxmodel_component.png)
+  <!--![구성요소](.\img\boxmodel_component.png) -->
+  ![boxmodel_component](https://user-images.githubusercontent.com/71952165/133574962-1a270806-dbb3-4e0a-ab28-dd873fbd043c.PNG)
 
 - 박스모델 관련 속성
 
