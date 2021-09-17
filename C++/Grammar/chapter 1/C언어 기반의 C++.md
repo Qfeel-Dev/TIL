@@ -42,3 +42,28 @@
   - 함수에 전달되는 인자가 왼쪽에서붐터 오른쪽으로 채워지기 때문입니다.
 
 ## Namespace!🙋‍♂️
+
+- 공동코드 작성 시 개발간 함수 및 변수 이름의 중복을 막기위한 문법적 요소
+
+- 자신만의 이름공간을 만들고 그 안에 함수,변수를 정의,선언 함으로써 충돌을 방지
+
+- 이름공간을 지정할 경우엔 범위지정 연산자인 `::`을 이용한다.
+
+  ```c++
+  namespace com1{
+    void operate(void){
+      std::cout<<"com1 print"
+    }
+  }
+
+  namespace com2{
+    void operate(void){
+      std::cout<<"com2 print"
+    }
+  }
+
+  int main(void){
+    com1::operate();//com1 print
+    com2::operate();//com2 print
+  }
+  ```
