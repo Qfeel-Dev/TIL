@@ -160,6 +160,38 @@
   table 태그에만 적용시키면 됨*/
   ```
 
+- 배경 관련 스타일 속성
+
+  ```css
+  background-color: 색상;
+  /*배경색을 지정하는 속성 (value ex| red, #ff0000, rgb(255,0,0))*/
+
+  background-clip: 범위;
+  /*배경색을 지정할 범위를 정하는 속성 (value ex| border-box, padding-box, content-box)*/
+
+  background-image: url("이미지경로");
+  /*배경 이미지를 넣는 속성*/
+
+  background-repeat: 반복여부;
+  /*배경 이미지의 반복 방법을 지정하는 속성 (value ex| repeat,repeat-x,repeat-y,no-repeat)*/
+
+  background-position: <수평위치> <수직위치>;
+  /*배경 이미지의 위치를 조절하는 속성
+  백분율, 크기 값으로도 올 수 있지만 left,top과 같은 키워드로도 이용 가능*/
+
+  background-origin: 범위;
+  /*배경 이미지를 지정할 범위를 정하는 속성 (value ex| border-box, padding-box, content-box)*/
+
+  background-attachment: 고정여부
+  /*화면 스크롤시 이미지 고정여부를 설정하는 속성 (value ex| scroll,fixed)*/
+
+  background: url("주소") 반복여부 위치 고정여부
+  /*배경 이미지 관련 속성을 하나의 속성으로 사용하게끔 하는 속성*/
+
+  background-size: 크기
+  /*배경 이미지 크기를 조율하는 속성 (value ex| auto, cover, contain)*/
+  ```
+
 ## Layout with CSS✏️
 
 - 웹 문서에서 각 요소를 배치하는 방법으로 **CSS 박스모델**을 사용한다.
@@ -168,6 +200,7 @@
 
 - 박스모델 구성요소(그림)<br>
   <!--![구성요소](.\img\boxmodel_component.png) -->
+
   ![boxmodel_component](https://user-images.githubusercontent.com/71952165/133574962-1a270806-dbb3-4e0a-ab28-dd873fbd043c.PNG)
 
 - 박스모델 관련 속성
