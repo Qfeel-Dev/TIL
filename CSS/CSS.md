@@ -184,6 +184,22 @@
 
   transform: rotate(각도);
   /*요소를 설정한 각도만큼 회전 시키는 함수*/
+
+  /*트랜지션 : 스타일을 변경시키는 스타일 속성 + 
+  책엔 hover,active와 같이 사용자의 행위에 따른 변경만 나오는데
+  웹을 키자마자 동작되는 건 없나 찾아봐야겠다...*/
+
+  transition-property: 속성;
+  /*트랜지션을 적용할 요소를 지정해주는 속성 */
+
+  transition-duration: 시간;
+  /*스타일 변경이 진행되는 시간을 지정하는 속성 (value ex| 1s, 2s)*/
+
+  transition-delay: 시간;
+  /*트랜지션의 시작 시간을 지정하는 속성*/
+
+  transition-timing-function: 템포;
+  /*트랜지션의 진행 흐름을 설정하는 속성+ 음악에서의 템포라 생각하면 쉬움 (value ex| ease, linear)*/
   ```
 
 ## Layout with CSS✏️
