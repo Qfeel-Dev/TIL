@@ -368,11 +368,14 @@
 
 ## Reponsive Web🙌
 
-- PC뿐만 아니라 다양한 모바일 기기로도 웹 사이트 접근이 가능해지면서 화면에 크기에 **반응**하는 화면 요소를 바꾸어 사이트를 구현하는 방식
-- 각 기기별 크기를 맞추기 위해 **Viewport**를 설정하여 크기를 제어
-  - Viewport: 현재 화면에 보여지고 있는 영역을 의미
-- Viewport 지정방식
-  ```html
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!--너비를 기기에 맞추는 방법-->
-  ```
+- 뷰포트(Viewport)
+  - PC뿐만 아니라 다양한 모바일 기기로도 웹 사이트 접근이 가능해지면서 화면에 크기에 **반응**하는 화면 요소를 바꾸어 사이트를 구현하는 방식
+  - 각 기기별 크기를 맞추기 위해 **뷰포트**를 설정하여 크기를 제어
+    - 뷰포트: 현재 화면에 보여지고 있는 영역을 의미
+  - 뷰포트 지정방식
+    ```html
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--너비를 기기에 맞추는 방법-->
+    ```
+- 미디어 쿼리(media queries)
+  - 사용자가 어떤 미디어를 사용하는가에 따라 사이트의 형태가 바뀌도록 CSS를 작성하는 방법
