@@ -378,4 +378,27 @@
     <!--너비를 기기에 맞추는 방법-->
     ```
 - 미디어 쿼리(media queries)
+
   - 사용자가 어떤 미디어를 사용하는가에 따라 사이트의 형태가 바뀌도록 CSS를 작성하는 방법
+  - 미디어 쿼리 구문
+    ```css
+    @media 미디어 유형[ex|screen, tv] and (조건[max-width: 1439]) {
+      속성: 속성값;
+    }
+    ```
+  - 적용 방법
+
+    ```html css
+    <!--외부 파일-->
+    <link rel="stylesheet" media="미디어 쿼리 조건,유형" href="css 파일경로" />
+
+    @import url(css 파일경로) 미디어 쿼리 조건,유형;
+
+    <!--내부 파일-->
+    <style media="조건"></style>
+
+    <style>
+      @media <조건> {
+      }
+    </style>
+    ```
