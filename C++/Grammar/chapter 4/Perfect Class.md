@@ -21,8 +21,10 @@
 
 - const함수 : 함수 내에서는 멤버변수에 저장된 값을 변경하지 않겠다.
 
-  ```
-
+  ```cpp
+  Point::GetX() const{
+    return return x;
+  }
   ```
 
 - 작성 중 발견한 컴파일 오류
