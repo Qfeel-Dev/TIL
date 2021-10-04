@@ -36,3 +36,36 @@
 ## 캡슐화(Encapsulation)
 
 - 프로그램 복잡도 감소를 위해 관련있는 함수와 변수들을 하나의 클래스에 묶어버리는 작업
+
+- 캡슐화의 범위를 결정하기 위해선 구체적인 정보와 가정이 필요- 캡슐화가 어려운 개념인 이유
+
+  ```cpp
+  class SinivelCap{//캡슐화 대상 클래스
+    public:
+      void Take() const {cout<<"콧물이 싹~ 납니다."<<endl;}
+  };
+
+  class SneezeCap{//캡슐화 대상 클래스
+    public:
+      void Take() const {cout<<"재채기가 멎습니다."<<endl;}
+  };
+
+  class SnuffleCap{//캡슐화 대상 클래스
+    public:
+      void Take() const {cout<<"코가 뻥 뚫립니다."<<endl;}
+  };
+
+  class CONTAC600 {//캡슐화를 진행한 클래스
+    private:
+      SinivelCap sin;
+      SneezeCap sne;
+      SnuffleCap snu;
+
+    public:
+      void Take() const{
+        sin.Take();
+        sne.Take();
+        snu.Take();
+      }
+  };
+  ```
