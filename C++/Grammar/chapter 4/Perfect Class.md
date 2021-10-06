@@ -72,19 +72,56 @@
 
 ## 생성자🗻 & 소멸자🌋
 
-- 생성자 : 클래스의 이름과 함수이름이 동일하며, 반환형이 선언되지 않고 반환하지 않는 함수 + 객체 생성시 딱 한번만 호출됨
+- 생성자(Constructor)
 
-  ```cpp
-  class SimpleClass{
-    private:
-      int num1;
-      int num2;
+  - 클래스의 이름과 함수이름이 동일하며, 반환형이 선언되지 않고 반환하지 않는 함수
 
-    public:
-      SimpleClass(){//생성자
-        num1=1;//주로 변수 초기화의 용도
-        num2=2;
-      }
+  - 객체 생성시 딱 한번만 호출됨
 
-  }
-  ```
+    ```cpp
+    class SimpleClass{
+      private:
+        int num1;
+        int num2;
+
+      public:
+        SimpleClass(){//생성자
+          num1=1;//주로 변수 초기화의 용도
+          num2=2;
+        }
+    }
+    ```
+
+- 멤버 이니셜라이져(Member Initializer)
+
+  - 객체 생성과정 중에 멤버 변수 클래스에 해당하는 생성자를 호출하여 해당 객체또한 연쇄적으로 초기화하는 방식
+
+    ```cpp
+    class Point{
+      int x;
+      int y;
+      public:
+        Point(const int &xpos, const int &ypos);
+    };
+
+    Point::Point(const int &xpos, const int &ypos){
+      x=xpos;
+      y=ypos;
+    }
+
+
+    class Rectangle{
+      Point upLeft;
+      Point lowRight;
+
+      public:
+        Rectangle(const int &x1, const int &y1, const int &x2, const int &y2);
+    };
+
+    Rectangle::Rectangle(const int &x1, const int &y1, const int &x2, const int &y2)
+    :upLeft(x1, y1), lowRight(x2, y2)//멤버 이니셜라이져
+    {
+      /*객체 upleft의 생성과정에서 x1과 y1을 인자로 받는 생성자 호출*/
+      /*객체 lowRight의 생성과정에서 x2과 y2을 인자로 받는 생성자 호출*/
+    }
+    ```
