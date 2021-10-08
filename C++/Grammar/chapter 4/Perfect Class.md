@@ -161,3 +161,18 @@
         ~SimpleClass(){//소멸자}
     }
     ```
+
+## this 포인터
+
+- 객체자신의 주소 값을 의미하는 포인터
+- 객체의 멤버변수와 함수의 지역변수가 같을 경우 `this->멤버변수`를 사용하여 구분 가능
+  ```cpp
+  class Num{
+    private :
+      int num;
+    public:
+      void ThisFunc(int num){
+        this->num = num;//멤버변수에 지역변수 값을 대입
+      }
+  };
+  ```
