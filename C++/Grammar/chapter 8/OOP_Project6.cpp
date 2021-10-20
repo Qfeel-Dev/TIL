@@ -7,6 +7,7 @@ const int NAME_LEN=20;
 enum {MAKE=1, DEPOSIT, WITHDRAW, INQUIRE, EXIT};
 
 
+
 class Account{
 	private:
 		int accID;      // 계좌번호
@@ -29,35 +30,18 @@ class Account{
 			strcpy(this->cusName,copy.cusName);
 		}
 		
+		int GetPay(){return balance;}		
+		int GetID(){return accID;}
 		
-		void DepositAccMoney(int accid,int money){
-			
-			if(this->accID == accid){
-				balance += money;
-				cout<<"입금완료"<<endl<<endl;
-				return;
-			}
-
-			else{
-				cout<<"유효하지 않은 ID 입니다."<<endl<<endl;
-			}	
+		
+		virtual void DepositAccMoney(int money){			
+			balance += money;
+			return;
 		}
 		
-		void WithdrawAccMoney(int accid,int money){
-	
-			if(this->accID == accid){
-				if(balance<money){
-					cout<<"잔액부족"<<endl<<endl;
-					return;
-				}
-				balance-=money;
-				cout<<"출금완료"<<endl<<endl;
-				return;
-			}
-			
-			else{
-				cout<<"유효하지 않은 ID 입니다."<<endl<<endl;
-			}			
+		void WithdrawAccMoney(int money){			
+			balance-=money;
+			return;			
 		}
 		
 		void ShowAccInfo(void) const{
@@ -71,6 +55,49 @@ class Account{
 		}
 				
 };
+
+class NormalAccount : public Account{
+	private :
+		int BeneInfo;
+	public : 
+		NormalAccount(int accID, int balance, char *cusName,int benefit)
+		:Account(accID,balance,cusName), BeneInfo(benefit)
+		{}
+		
+		void DepositAccMoney(int money){						
+			Account::DepositAccMoney(money);
+			Account::DepositAccMoney(money*((double)BeneInfo/100));			
+			return;
+		}		
+};
+
+class HighCreditAccount : public NormalAccount{
+	private :
+		int level;
+	public : 
+		HighCreditAccount(int accID, int balance, char *cusName,int benefit,int lv)
+		:NormalAccount(accID,balance,cusName,benefit),level(lv){}
+		
+		void DepositAccMoney(int money){
+			NormalAccount::DepositAccMoney(money);
+			switch(level){
+				case 1:
+					Account::DepositAccMoney(money*0.07);
+					break;
+				
+				case 2:
+					Account::DepositAccMoney(money*0.04);
+					break;
+					
+				case 3:
+					Account::DepositAccMoney(money*0.02);
+					break;
+			}
+			return;
+		}
+		
+};
+
 
 
 class AccountHandler{
@@ -86,9 +113,19 @@ class AccountHandler{
 			int id;
 			char name[NAME_LEN];
 			int balance;
-			
-			
-			cout<<"[계좌개설]"<<endl;
+			int AccountType;
+			int bene;//이자율		
+			int level;	
+
+			cout<<"[계좌종류선택]"<<endl;
+			cout<<"1.보통예금계좌 2.신용신뢰계좌"<<endl;
+			cout<<"선택: ";	
+			cin>>AccountType;
+
+			if(AccountType == 1){cout<<"[보통예금계좌 개설]"<<endl;} 
+			else if(AccountType == 2){cout<<"[신용예금계좌 개설]"<<endl;} 
+			else{cout<<"유효하지 않은 선택지 입니다."<<endl; return;}
+						
 			cout<<"계좌ID: ";	
 			cin>>id;
 			
@@ -97,14 +134,28 @@ class AccountHandler{
 			
 			cout<<"입금액: ";	
 			cin>>balance;
+						
 			
-			cout<<endl;
+			if(AccountType == 1 || AccountType == 2)
+			{
+				cout<<"이자율: ";
+				cin>>bene;							
 			
-		 	
-			accArr[accNum] = new Account(id,balance,name);
-			accNum++;
-		}
+				if(AccountType == 1) accArr[accNum] = new NormalAccount(id,balance,name,bene);
+				
+				else{
+					cout<<"신용등급(1toA, 2toB, 3toC): ";
+					cin>>level;
+					
+					accArr[accNum] = new HighCreditAccount(id,balance,name,bene,level);
+				}
+								
+				accNum++;				
+				cout<<endl;
+			} 
 	
+			else{cout<<"유효하지 않은 선택지 입니다."<<endl; return;} //추후 계좌 종류 증설시 사용 								 			
+		}
 	
 	
 		void DepositMoney(void){
@@ -116,9 +167,16 @@ class AccountHandler{
 			cout<<"입금액: ";	
 			cin>>money;
 			
-			for(int i=0; i<accNum; i++){
-				accArr[i]->DepositAccMoney(id,money);	
+			for(int i=0; i<accNum; i++){				
+				if(id == accArr[i]->GetID()){
+					accArr[i]->DepositAccMoney(money);	
+					cout<<"입금완료"<<endl<<endl;
+					return;
+				}												
 			}
+			
+			cout<<"유효하지 않은 ID 입니다."<<endl<<endl;
+			return;	
 		}
 	
 	
@@ -130,22 +188,28 @@ class AccountHandler{
 			cout<<"출금액: ";	cin>>money;
 			
 			for(int i=0; i<accNum; i++){
-				accArr[i]->WithdrawAccMoney(id,money);
+				if(id == accArr[i]->GetID()){
+					if(accArr[i]->GetPay() < money){
+						cout<<"잔액부족"<<endl<<endl;
+						return;
+					}
+					
+					accArr[i]->WithdrawAccMoney(money);
+					cout<<"출금완료"<<endl<<endl;
+					return;
+				}																
 			}
+			
+			cout<<"유효하지 않은 ID 입니다."<<endl<<endl;
+			return;	
 		}
 		
-		void ShowAllAccInfo(void){
+		void ShowAllAccInfo(void) const{
 			for(int i=0; i<accNum; i++){
 				accArr[i]->ShowAccInfo();
 			}
 		}
 }; 
-
-
-
-
-
-
 
 
 int main(){
@@ -168,7 +232,6 @@ int main(){
 		switch(choice){
 			case MAKE:
 				handler.MakeAccount(); 
-				
 				break;
 			case DEPOSIT:
 				handler.DepositMoney(); 
