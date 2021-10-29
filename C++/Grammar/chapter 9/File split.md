@@ -44,3 +44,11 @@
     return n1+n2;
   }
   ```
+
+## Build Process(Compiler)
+
+- preprocesser -> trnaslation unit
+
+- compiler -> obj
+
+- linker -> exe
