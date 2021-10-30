@@ -13,7 +13,6 @@ class Account{
 		int GetPay();		
 		int GetID();
 		
-		
 		virtual void DepositAccMoney(int money);
 		
 		void WithdrawAccMoney(int money);

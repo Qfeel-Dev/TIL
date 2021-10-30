@@ -4,9 +4,9 @@
 
 Account::Account(int ID,int money,char *name)
 :accID(ID),balance(money)
-{
-	this->cusName = new char[strlen(cusName)+1];
-	strcpy(this->cusName,cusName);
+{	
+	cusName = new char[strlen(name)+1];
+	strcpy(cusName,name);
 }
 
 Account::Account(const Account& copy)
@@ -24,7 +24,6 @@ void Account::DepositAccMoney(int money){
 	return;
 }
 
-
 void Account::WithdrawAccMoney(int money){			
 	balance-=money;
 	return;			
@@ -39,5 +38,3 @@ void Account::ShowAccInfo(void) const{
 Account::~Account(){
 	delete []cusName;
 }
-
-//int main(){}

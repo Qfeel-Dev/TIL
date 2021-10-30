@@ -1,55 +1,65 @@
 #include "BankingCommonDec1.h"
+#include "AccountHandler.h"
+#include "HighCreditAccount.h"
+#include "NormalAccount.h"
+#include "Account.h"
 
-AccountHandler::AccountHandler():accNum(20){}
+
+AccountHandler::AccountHandler():accNum(0){}
+
+AccountHandler::~AccountHandler()
+{
+	for(int i=0; i<accNum; i++)
+		delete accArr[i];
+}
 
 
 void AccountHandler::MakeAccount(void) {
-			int id;
-			char name[NAME_LEN];
-			int balance;
-			int AccountType;
-			int bene;//이자율		
-			int level;	
+	int id;
+	char name[NAME_LEN];
+	int balance;
+	int AccountType;
+	int bene;//이자율		
+	int level;	
 
-			cout<<"[계좌종류선택]"<<endl;
-			cout<<"1.보통예금계좌 2.신용신뢰계좌"<<endl;
-			cout<<"선택: ";	
-			cin>>AccountType;
+	cout<<"[계좌종류선택]"<<endl;
+	cout<<"1.보통예금계좌 2.신용신뢰계좌"<<endl;
+	cout<<"선택: ";	
+	cin>>AccountType;
 
-			if(AccountType == 1){cout<<"[보통예금계좌 개설]"<<endl;} 
-			else if(AccountType == 2){cout<<"[신용예금계좌 개설]"<<endl;} 
-			else{cout<<"유효하지 않은 선택지 입니다."<<endl; return;}
-						
-			cout<<"계좌ID: ";	
-			cin>>id;
-			
-			cout<<"이  름: ";	
-			cin>>name;
-			
-			cout<<"입금액: ";	
-			cin>>balance;
-						
-			
-			if(AccountType == 1 || AccountType == 2)
-			{
-				cout<<"이자율: ";
-				cin>>bene;							
-			
-				if(AccountType == 1) accArr[accNum] = new NormalAccount(id,balance,name,bene);
-				
-				else{
-					cout<<"신용등급(1toA, 2toB, 3toC): ";
-					cin>>level;
-					
-					accArr[accNum] = new HighCreditAccount(id,balance,name,bene,level);
-				}
-								
-				accNum++;				
-				cout<<endl;
-			} 
+	if(AccountType == 1){cout<<"[보통예금계좌 개설]"<<endl;} 
+	else if(AccountType == 2){cout<<"[신용예금계좌 개설]"<<endl;} 
+	else{cout<<"유효하지 않은 선택지 입니다."<<endl; return;}
 	
-			else{cout<<"유효하지 않은 선택지 입니다."<<endl; return;} //추후 계좌 종류 증설시 사용 								 			
+				
+	cout<<"계좌ID: ";	
+	cin>>id;
+	
+	cout<<"이  름: ";	
+	cin>>name;
+	
+	cout<<"입금액: ";	
+	cin>>balance;
+				
+	
+	if(AccountType == 1 || AccountType == 2)
+	{
+		cout<<"이자율: ";
+		cin>>bene;							
+	
+	
+		if(AccountType == 1) accArr[accNum] = new NormalAccount(id,balance,name,bene);
+		
+		else{
+			cout<<"신용등급(1toA, 2toB, 3toC): ";
+			cin>>level;
 			
+			accArr[accNum] = new HighCreditAccount(id,balance,name,bene,level);
+		}
+						
+		accNum++;				
+		cout<<endl;
+	} 	
 }
 
 

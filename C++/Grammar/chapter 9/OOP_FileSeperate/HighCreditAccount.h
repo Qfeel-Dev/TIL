@@ -1,9 +1,7 @@
-#ifndef __HIGH_CREDIT_ACCOUNT_H__
-#define __HIGH_CREDIT_ACCOUNT_H__
+#ifndef __HIGHCREDIT_ACCOUNT_H__
+#define __HIGHCREDIT_ACCOUNT_H__
 
-#include "BankingCommonDec1.h"
 #include "NormalAccount.h"
-
 
 
 class HighCreditAccount : public NormalAccount{
