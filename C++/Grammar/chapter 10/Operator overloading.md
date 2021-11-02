@@ -51,7 +51,7 @@
       friend Point operator+(const Point &ref)    //operator+ 함수가 xpos,ypos를 사용할 수 있게끔 friend 선언
     };
 
-    Point operator+(const Point &pos1, const Point &pos2)    //+ 얀산자 오버로딩
+    Point operator+(const Point &pos1, const Point &pos2) //+연산자 오버로딩
     {
       Point pos(pos1.xpos+pos2.xpos, pos1.ypos+pos2.ypos);
       return pos;
@@ -67,6 +67,10 @@
     ```
 
 - 연산자 오버로딩 시 주의사항
+
   - 본래의 의도를 벗어난 형태의 연산자 오버로딩은 좋지않다.
   - 연산자의 우선순위와 결합성은 바뀌지 않는다.
   - 연산자의 순수 기능까지 빼앗을 수 없다.
+
+- 단항 연산자의 오버로딩
+  - `++` , `-- `, `!` 등과 같은 단항연산자는 매개변수가 없는 멤버변수로 선언하며 오버로딩 되어진다.
