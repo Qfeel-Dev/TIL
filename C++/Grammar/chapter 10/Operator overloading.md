@@ -73,4 +73,29 @@
   - 연산자의 순수 기능까지 빼앗을 수 없다.
 
 - 단항 연산자의 오버로딩
+
   - `++` , `-- `, `!` 등과 같은 단항연산자는 매개변수가 없는 멤버변수로 선언하며 오버로딩 되어진다.
+  - 멤버함수 단항 연산자 오버로딩
+
+    ```cpp
+    class Point
+    {
+    private:
+      int xpos, ypos;
+    public:
+      Point(int x=0, int y=0) : xpos(x), ypos(y)
+      {  }
+
+      Point operator++()    //++ 얀산자 오버로딩
+      {
+        xpos+=1;
+        ypos+=1;
+        return *this;
+      }
+    };
+
+    int main(void){
+      Point p1(5,3);
+      p1++;
+    }
+    ```
