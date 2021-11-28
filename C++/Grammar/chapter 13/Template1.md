@@ -18,3 +18,17 @@ int main(void)
   Add<double>(2.9,3.7);//자료형 double로 템플릿 사용
 }
 ```
+
+- 상황에따라 함수의 구성방법에 예외 둘 필요가 있는 경우 **함수 템플릿의 특수화(Specialization)**를 사용한다
+
+```cpp
+template <>//char* 형 함수의 특수화 예시
+char* Add(char* a, char* b)
+{
+  char* summary = new char[strlen(a) + strlen(b) +1];
+  strcpy(summary,a);
+  strcat(txt,s.txt);
+
+  return summary;
+}
+```
