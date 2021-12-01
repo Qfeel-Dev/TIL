@@ -23,12 +23,24 @@
 
   - `CMainFrame` : 화면에 보여지는 창(프레임,틀)과 관련, 윈도우 관련 기능 정의, 뷰를 생성
 
+    ```cpp
+    //int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) 함수 중 일부 발췌
+    if (CFrameWnd::OnCreate(lpCreateStruct) == -1)//메인프레임 생성
+    if (!m_wndView.Create(nullptr, nullptr, AFX_WS_DEFAULT_VIEW, CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, nullptr))//뷰 생성
+
+    if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY CBRS_SIZE_DYNAMIC) ||
+    !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))//툴바 생성
+
+    if (!m_wndStatusBar.Create(this))//상태 표시줄 생성
+    //
+
+    BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)//창 생성전에 사전 정보(크기 좌표 등)를 변경하는 함수
     ```
 
-    ```
+  - `CChildView` : 화면에 보여지는 창(하얀 콘텐츠 영역)과 관련, 창과 관련 = 어플리케이션의 클라이언트 영역 + 메세지에 대응하는 이벤트들에 대응하는 메세지 맵이 존재
 
-  - `CChildView` : 화면에 보여지는 창(하얀 콘텐츠 영역)과 관련, 창과 관련 = 어플리케이션의 클라이언트 영역
+    ```cpp
+    void CChildView::OnPaint() //창이 그려질때 실행되는 이벤트
 
-    ```
-
+    void CChildView::OnLButtonDown(UINT nFlags, CPoint point)//왼쪽 버튼을 눌렀을때 실행되는 이벤트
     ```
