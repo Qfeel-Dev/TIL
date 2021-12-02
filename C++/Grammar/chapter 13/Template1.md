@@ -53,4 +53,19 @@
         std::cout<<xpos<<"  "<<ypos<<endl;
       }
   };
+  /*외부정의 방식
+  template <typename T>
+  Point<T>::Point(T x,T y) : xpos(x), ypos(y)
+  {}
+
+  template <typename T>
+  void ShowPosition() const
+  {
+    std::cout<<xpos<<"  "<<ypos<<endl;
+  }
+  */
+  int main()
+  {
+    Point<int> pos1(3,4);
+  }
   ```
