@@ -53,7 +53,7 @@
         std::cout<<xpos<<"  "<<ypos<<endl;
       }
   };
-  /*외부정의 방식
+  /*외부 정의 방식
   template <typename T>
   Point<T>::Point(T x,T y) : xpos(x), ypos(y)
   {}
@@ -69,3 +69,5 @@
     Point<int> pos1(3,4);
   }
   ```
+
+- 외부 정의 방식을 사용하여 파일을 나눌 때에는 컴파일러의 **파일단위 컴파일** 역할을 생각해야하며, 그렇기 때문에 header파일에 정의를 추가해야한다.
