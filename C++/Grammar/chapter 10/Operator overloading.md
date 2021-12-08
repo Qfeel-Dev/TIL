@@ -33,6 +33,7 @@
      cout<< p1.operator+(p2)<<endl//함수 이름을 통한 호출
      cout<< p1+p2<<endl//연산자를 통한 호출 => p1.operator+(p2)로 치환
      //둘다 동일한 Point operator+(const Point &ref) 함수 호출
+     //"p1이 operator+ 함수에다가 p2라는 매개변수를 집어넣고 호출한다" 로 해석됨
    }
   ```
 
