@@ -25,13 +25,20 @@ int isempty()
 
 int equeue(Process v)
 {
-	strcpy(prc_arr[tail].name,v.name);
-	prc_arr[tail].size = v.size;
+	prc_arr[tail] = v;
+
 	tail++;
+	//tail = (tail +1)%100001; // 원형큐 
 }
 
 Process dequeue()
 {
+	/*원형큐 
+	Process q = prc_arr[head];
+	head = (head+1) % 100001;
+	return q; 
+	*/	
+
 	return prc_arr[head++];
 }
 
