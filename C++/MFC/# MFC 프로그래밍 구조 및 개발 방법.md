@@ -46,7 +46,14 @@
     ```
 
 - MFC로 제작한 어플리케이션이 화면으로 보여지는 경로는 **APP -> 디바이스 컨텍스트(DC) -> GDI -> 드라이버 -> 출력장치** 를 따른다.
+
   - 디바이스 컨텍스트(DC)
     - 출력과 관련된 다양한 정보를 가짐
     - gdi가 생성하고 관리하는 데이터 구조체
     - 멀티태스킹 gui환경에서 발생할 수 있는 복잡한 상황들을 신경쓰지 않고 장치에 자유롭게 사용가능
+
+- MFC 프로그램 기본 진행 순서
+  - CMainFrame::LoadFrame()
+  - CMainFrame::PreCreateWindow()
+  - CMainFrame::PreSubclassWindow()
+  - CMainFrame::OnCreate()
