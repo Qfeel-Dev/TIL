@@ -78,6 +78,7 @@ void CChildView::OnPaint()
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 	//DC생성 CChildeView 객체
+	/*
 	CRect rect;
 	GetClientRect(rect);
 
@@ -86,6 +87,7 @@ void CChildView::OnPaint()
 
 	dc.LineTo(rect.right, rect.top);
 	dc.LineTo(rect.left, rect.bottom);
+	*/
 	//wm_timer
 	/*
 	for (int x = 0; x < 255; x++)
@@ -121,10 +123,25 @@ void CChildView::OnPaint()
 
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	CClientDC dc(this);
+	CClientDC dc(this);//그리는 놈
 
-	COLORREF color = dc.GetPixel(point);
-	TRACE("r %d g %d b %d",GetRValue(color), GetGValue(color), GetBValue(color));
+	if (m_flag == false) 
+	{
+		b_point= point;
+		
+		m_flag = true;
+	}
+
+	else 
+	{
+		dc.MoveTo(b_point);
+		dc.LineTo(point);
+		m_flag = false;
+	}
+
+
+//	COLORREF color = dc.GetPixel(point);
+//	TRACE("r %d g %d b %d",GetRValue(color), GetGValue(color), GetBValue(color));
 /*	dc.Ellipse(point.x-20, point.y - 20, point.x +20, point.y+ 20);
 	m_flag = true;
 	

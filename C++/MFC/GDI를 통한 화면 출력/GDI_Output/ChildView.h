@@ -37,5 +37,6 @@ public:
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	bool m_flag;
+	CPoint b_point;
 };
 
