@@ -38,5 +38,7 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	bool m_flag;
 	CPoint b_point;
+	CPoint m_pt[10];
+	int m_cnt;
 };
 
