@@ -84,8 +84,25 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 void CChildView::OnPaint() 
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
-	
-	dc.SetMapMode(MM_LOMETRIC); //매핑모드 변경 함수 //출력
+	CPen pen1(PS_SOLID,20,RGB(255,0,0));
+	CBrush br1(BS_SOLID, RGB(0, 255, 0));
+	CBitmap bitmap;
+	bitmap.LoadBitmapW(IDB_BITMAP1);
+	CBrush br2(&bitmap);
+
+	dc.SelectObject(pen1);
+	dc.SelectObject(br1);//다른 gdi  객체일 경우 중복 적용 가능
+	dc.Rectangle(100, 100, 200, 200);
+	dc.SelectObject(br2);
+
+	dc.Rectangle(200, 200, 300, 300);
+	/*
+	GDI객체를 생성후에
+	그 객체를 SELECTOBJECT(DC가 다른 설정이 되어있을 경우 그 설정을 리턴)를 이용하여 DC객체에 설정한다
+	GDI함수를 사용하여 출력한다
+	*/
+
+	//dc.SetMapMode(MM_LOMETRIC); //매핑모드 변경 함수 //출력
 	//매핑모드를 다르게 사용하게 된다면 입력과 출력모드를 동일하게해야 원하는 위치에 출력가능
 	//-> 입력 좌표 변환이 필요 -> DPtoLP
 
@@ -159,8 +176,8 @@ void CChildView::OnPaint()
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CClientDC dc(this);//그리는 놈
-	dc.SetMapMode(MM_LOMETRIC); //매핑모드 변경 함수 //출력
-	dc.DPtoLP(&point);
+	//dc.SetMapMode(MM_LOMETRIC); //매핑모드 변경 함수 //출력
+	//dc.DPtoLP(&point);
 	//변수 값을 띄울때 자주 사용되는 방법
 	CString str;
 	str.Format(_T("%3d %3d"), point.x, point.y);
