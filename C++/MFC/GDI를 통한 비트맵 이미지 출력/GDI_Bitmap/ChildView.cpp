@@ -25,6 +25,7 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
+	ON_WM_SIZE()//창 크기가 변경될때 전달되는 메세지
 END_MESSAGE_MAP()
 
 
@@ -71,7 +72,12 @@ void CChildView::OnPaint()
 	memdc.Ellipse(0, 0, 10, 10);
 
 	dc.BitBlt(0, 0, 500, 500, &memdc, 0, 0, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
+	
+													 
+	CRect rect;
+	GetClientRect(&rect);
 
+	//dc.StretchBlt(0,0,500,500,&memdc,rect.)//축소나 확대 가 가능한  비트맵 출력 함수
 
 	/*
 	CRect rect;
@@ -96,3 +102,11 @@ void CChildView::OnPaint()
 	// 그리기 메시지에 대해서는 CWnd::OnPaint()를 호출하지 마십시오.
 }
 
+
+
+void CChildView::OnSize(UINT nType, int cx, int cy)//
+{
+	CWnd::OnSize(nType, cx, cy);
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+}
