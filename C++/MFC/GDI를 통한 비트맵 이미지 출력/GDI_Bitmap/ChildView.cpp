@@ -71,8 +71,8 @@ void CChildView::OnPaint()
 	memdc.SelectObject(&binfo);//메모리dc 에다가 bitmap 정보 입력
 	memdc.Ellipse(0, 0, 10, 10);
 
-	dc.BitBlt(0, 0, 500, 500, &memdc, 0, 0, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
-	
+	dc.StretchBlt(0, 0, m_Clientrect.Width() , m_Clientrect.Height() , &memdc, 0, 0, bmpinfo.bmWidth,bmpinfo.bmHeight, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
+	//dc.BitBlt(0, 0, m_Clientrect.Width(), m_Clientrect.Height(), &memdc, 0, 0, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
 													 
 	CRect rect;
 	GetClientRect(&rect);
@@ -104,9 +104,12 @@ void CChildView::OnPaint()
 
 
 
-void CChildView::OnSize(UINT nType, int cx, int cy)//
+void CChildView::OnSize(UINT nType, int cx, int cy)//창크기 변경 + 창 생성시 실행되는 메세지
 {
 	CWnd::OnSize(nType, cx, cy);
+
+	GetClientRect(m_Clientrect);
+
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 }

@@ -32,5 +32,9 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+//	Crect m_Clinetrect;
+	CRect m_Clientrect;
 };
 
