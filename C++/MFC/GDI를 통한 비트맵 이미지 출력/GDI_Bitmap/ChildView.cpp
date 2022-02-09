@@ -15,6 +15,7 @@
 // CChildView
 
 CChildView::CChildView()
+	:m_color(RGB(255,255,255))
 {
 }
 
@@ -26,6 +27,7 @@ CChildView::~CChildView()
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_WM_SIZE()//창 크기가 변경될때 전달되는 메세지
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -53,7 +55,6 @@ void CChildView::OnPaint()
 
 	비트맵 이미지 입력 -> 메모리 DC -> 화면 DC -> 화면 출력
 	(화면 출력은 메모리 DC가 입력을 다 받은 후 최초 1번만 한다 -> 그렇지 않으면 끔벅임)
-
 	*/
 
 	//Bitmap 출력 과정
@@ -71,11 +72,14 @@ void CChildView::OnPaint()
 	memdc.SelectObject(&binfo);//메모리dc 에다가 bitmap 정보 입력
 	memdc.Ellipse(0, 0, 10, 10);
 
-	dc.StretchBlt(0, 0, m_Clientrect.Width() , m_Clientrect.Height() , &memdc, 0, 0, bmpinfo.bmWidth,bmpinfo.bmHeight, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
+	dc.TransparentBlt(0, 0, m_Clientrect.Width(), m_Clientrect.Height(), &memdc, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, m_color);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
+	//dc.StretchBlt(0, 0, m_Clientrect.Width() , m_Clientrect.Height() , &memdc, 0, 0, bmpinfo.bmWidth,bmpinfo.bmHeight, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
+	//dc.TransparentBlt 특정색상을 투명하게 처리
+	//
 	//dc.BitBlt(0, 0, m_Clientrect.Width(), m_Clientrect.Height(), &memdc, 0, 0, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
 													 
-	CRect rect;
-	GetClientRect(&rect);
+	//CRect rect;
+	//GetClientRect(&rect);
 
 	//dc.StretchBlt(0,0,500,500,&memdc,rect.)//축소나 확대 가 가능한  비트맵 출력 함수
 
@@ -112,4 +116,16 @@ void CChildView::OnSize(UINT nType, int cx, int cy)//창크기 변경 + 창 생�
 
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+}
+
+
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CClientDC dc(this);
+
+	m_color = dc.GetPixel(point);
+	Invalidate(true);//중요 트루일 경우 화면을 다지우고 그리라고 하는거기때문에 이상이상
+
+	CWnd::OnLButtonDown(nFlags, point);
 }
