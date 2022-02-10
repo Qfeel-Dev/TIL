@@ -17,6 +17,7 @@
 CChildView::CChildView()
 	:m_color(RGB(255,255,255))
 {
+	hresult = img.Load(_T("\res\images\20200206_114555.jpg"));
 }
 
 CChildView::~CChildView()
@@ -28,6 +29,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_WM_SIZE()//창 크기가 변경될때 전달되는 메세지
 	ON_WM_LBUTTONDOWN()
+	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
 
@@ -60,6 +62,14 @@ void CChildView::OnPaint()
 	//Bitmap 출력 과정
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다. //화면 dc
 	
+	if (FAILED(hresult)) {
+		AfxMessageBox(_T("error"));
+	}
+	else {
+		img.BitBlt(dc.m_hDC, 0, 0, SRCCOPY);
+	}
+
+	/*
 	CDC memdc;//메모리 dc
 	memdc.CreateCompatibleDC(&dc);//메모리 DC와 화면 DC연결
 
@@ -73,6 +83,7 @@ void CChildView::OnPaint()
 	memdc.Ellipse(0, 0, 10, 10);
 
 	dc.TransparentBlt(0, 0, m_Clientrect.Width(), m_Clientrect.Height(), &memdc, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, m_color);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
+	*/
 	//dc.StretchBlt(0, 0, m_Clientrect.Width() , m_Clientrect.Height() , &memdc, 0, 0, bmpinfo.bmWidth,bmpinfo.bmHeight, SRCCOPY);//Bitmap 출력 //;그림에 특정 부분을 가져올 수 있는 방식
 	//dc.TransparentBlt 특정색상을 투명하게 처리
 	//
@@ -128,4 +139,15 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 	Invalidate(true);//중요 트루일 경우 화면을 다지우고 그리라고 하는거기때문에 이상이상
 
 	CWnd::OnLButtonDown(nFlags, point);
+}
+
+
+int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)//창 생성시 전달되는 메세지
+{
+	if (CWnd::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
+
+	return 0;
 }

@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <atlimage.h>
 
 // CChildView 창
 
@@ -36,5 +37,10 @@ public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 //	Crect m_Clinetrect;
 	CRect m_Clientrect;
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	COLORREF m_color;
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	CImage img;
+	HRESULT hresult;
 };
 
