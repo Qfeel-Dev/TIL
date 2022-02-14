@@ -14,7 +14,7 @@
 
 // CChildView
 
-CChildView::CChildView() :m_mouseIn(FALSE), rect(200, 200, 400, 400)
+CChildView::CChildView() :m_mouseIn(FALSE), rect(200, 200, 400, 400),cnt(0)
 {
 }
 
@@ -32,6 +32,8 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_DESTROY()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
+	ON_WM_MBUTTONDOWN()
+	ON_WM_NCLBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -190,16 +192,8 @@ void CChildView::OnDestroy()//창 닫힐때 호출되는 핸들러
 }
 */
 
-void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
-{
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	m_arr.Add(point);
 
-
-	CWnd::OnLButtonDown(nFlags, point);
-}
-
-
+/*
 void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
@@ -211,6 +205,98 @@ void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
 
 	m_arr.RemoveAll();
 	//Invalidate();
+
+	CWnd::OnRButtonDown(nFlags, point);
+}
+
+
+void CChildView::OnMButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CWnd::OnMButtonDown(nFlags, point);
+}
+*/
+
+/*
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CShape shape(point, true);
+	m_arr.Add(shape);
+
+	CWnd::OnLButtonDown(nFlags, point);
+}
+
+
+
+void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CShape shape(point, false);
+	m_arr.Add(shape);
+
+	CWnd::OnRButtonDown(nFlags, point);
+}
+
+
+void CChildView::OnMButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CClientDC dc(this);
+
+
+	for (int i = 0; i < m_arr.GetSize(); i++) {
+		if (m_arr[i].m_flag == true) {
+			dc.Rectangle(m_arr[i].m_pt.x - 50,
+				m_arr[i].m_pt.y - 50,
+				m_arr[i].m_pt.x + 50,
+				m_arr[i].m_pt.y + 50);
+		}
+
+		else {
+			dc.Ellipse(m_arr[i].m_pt.x - 50,
+				m_arr[i].m_pt.y - 50,
+				m_arr[i].m_pt.x + 50,
+				m_arr[i].m_pt.y + 50);
+		}
+
+	}
+
+
+	CWnd::OnMButtonDown(nFlags, point);
+}
+*/
+
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	m_tmp.Add(point);
+	
+
+	CWnd::OnLButtonDown(nFlags, point);
+}
+
+void CChildView::OnNcLButtonDblClk(UINT nHitTest, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CShape shape;
+	shape.m_polygon.Copy(m_tmp);
+	///color 추가
+	m_arr.Add(shape);
+	m_tmp.RemoveAll();
+
+	CWnd::OnNcLButtonDblClk(nHitTest, point);
+}
+
+void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	CClientDC dc(this);
+
+	for (int i = 0; i < m_arr.GetSize(); i++) {
+		dc.Polygon(m_arr[i].m_polygon.GetData(),
+			m_arr[i].m_polygon.GetSize());//getdata -> c형태의 포인터 형태로 변수 반환
+	}
 
 	CWnd::OnRButtonDown(nFlags, point);
 }

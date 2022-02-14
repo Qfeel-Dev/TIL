@@ -4,7 +4,7 @@
 
 
 #pragma once
-
+#include "CShape.h"
 
 // CChildView 창
 
@@ -43,7 +43,11 @@ public:
 	//CArray<CPoint, CPoint&> m_arr;//template? - 1차원
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnMButtonDown(UINT nFlags, CPoint point);
-	CArray<CPoint, CPoint &> m_arr[10]; //2차원 10 층 동적 방
+	//afx_msg void OnMButtonDown(UINT nFlags, CPoint point);
+	//CArray<CPoint, CPoint &> m_arr[10]; //2차원 10 층 동적 방
+	CArray<CShape, CShape&> m_arr;
+	CArray<CPoint, CPoint&> m_tmp;//폴리곤 저장을 위한 임시 배열
+	afx_msg void OnNcLButtonDblClk(UINT nHitTest, CPoint point);
+	int cnt;
 };
 
