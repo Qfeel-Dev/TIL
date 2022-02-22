@@ -117,3 +117,31 @@
     return 0;
   }
   ```
+
+  ### `list`
+
+  ```c++
+  #include <iostream>
+  #include <list>
+
+  using namespace std;
+
+  int main(){
+    list<char>	L;
+
+    L.push_front('b');//b 리스트에 가장 앞에 매개 변수 값 추가
+    L.push_back('c');//bc 리스트에 가장 뒤에 매개 변수 값 추가
+    L.push_front('a');//abc
+
+    cout << L.front();//c 리스트에 가장 앞에 값을 리턴
+    cout << L.back();//a  리스트에 가장 뒤에 값을 리턴
+
+    L.pop_front();
+    L.push_back('d');
+
+    cout << L.front();//b
+    cout << L.back();//d
+
+    return 0;
+  }
+  ```
